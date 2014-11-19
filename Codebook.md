@@ -28,7 +28,7 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
 
 Transformation of the original data
 -----------------------------------
-From the original data set the following files were combnied using the
+From the original data set the following files were combined using the
 run_analysis.R script:
 
 - X_test.txt            :data for 'test' subjects
@@ -55,12 +55,12 @@ the dataframe as factors
 5. Activities contained in y_test.txt and y_train.txt were appended to the data
 frame as factors, with labels converted to lower case
 6.Variable names were transformed by removing "-" and "()". Camel Case was used
-for variable names, given theirrelative length. Initial "t" was replaced by "time",
+for variable names, given their relative length. Initial "t" was replaced by "time",
 and "f" by "frequency". "Acc" and "Gyro" were left as abbreviations to avoid further
 lengthening variable names. Variable names with "BodyBody" were corrected to "Body"
 7. Using the `melt` function, this data frame was melted into a *long* data set using subjectNumber and activity 
 as ID variables
-8. This long data set was cast using `dcast`into the *wide* dataset described above
+8. This long data set was cast using `dcast`into the *wide* dataset described below
 
 
 Description of transformed data set, meanSubjectActivity.txt
