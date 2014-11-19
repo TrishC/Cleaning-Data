@@ -26,6 +26,42 @@ Data were downloaded from:
 
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
+Transformation of the original data
+-----------------------------------
+From the original data set the following files were combnied using the
+run_analysis.R script:
+
+- X_test.txt            :data for 'test' subjects
+- X_train.txt           :data for 'train' subjects
+- features.txt          :variable names for X_test.txt and Y_test.txt
+- subject_test.txt      :subject numbers for 'test' subjects
+- subject_train.txt     :subject numbers for 'train' subjects
+- y_test.txt            ;activities undertaken by 'test' subjects
+- y_train.txt           :activities undertaken by 'train' subjects
+- activity_labels.txt   :links the class labels with their activity name
+
+The following steps were undertaken to select a subset of the data and clean to create a tidy data set suitable for further analysis:
+
+1. The data contained in X_test.txt and X_train.txt were combined using `rbind()`
+2. Variable names contained in features.txt were appended to the dataframe in
+step 1
+3. Variables containing either "mean()"" or "std()" in their name were 
+identified and used to extract only columns corresponding to these variables. 
+Variables containing the word "mean", without "()" were not extracted, as they 
+were not considered to be aggregated at a similar level to the other variables 
+extracted.
+4.Subject numbers from subject_test.txt and subject_train.txt were appended to 
+the dataframe as factors
+5. Activities contained in y_test.txt and y_train.txt were appended to the data
+frame as factors, with labels converted to lower case
+6.Variable names were transformed by removing "-" and "()". Camel Case was used
+for variable names, given theirrelative length. Initial "t" was replaced by "time",
+and "f" by "frequency". "Acc" and "Gyro" were left as abbreviations to avoid further
+lengthening variable names. Variable names with "BodyBody" were corrected to "Body"
+7. Using the `melt` function, this data frame was melted into a *long* data set using subjectNumber and activity 
+as ID variables
+8. This long data set was cast using `dcast`into the *wide* dataset described above
+
 
 Description of transformed data set, meanSubjectActivity.txt
 ------------------------------------------------------------
@@ -196,43 +232,7 @@ frequencyBodyGyroJerkMagStd (Column 68)
     average standard deviation of magnitude of  body angular velocity jerk signals in frequency domain
 
 
-Transformation of the original data
------------------------------------
-From the original data set the following files were combnied using the
-run_analysis.R script:
 
-- X_test.txt            :data for 'test' subjects
-- X_train.txt           :data for 'train' subjects
-- features.txt          :variable names for X_test.txt and Y_test.txt
-- subject_test.txt      :subject numbers for 'test' subjects
-- subject_train.txt     :subject numbers for 'train' subjects
-- y_test.txt            ;activities undertaken by 'test' subjects
-- y_train.txt           :activities undertaken by 'train' subjects
-- activity_labels.txt   :links the class labels with their activity name
-
-The following steps were undertaken to select a subset of the data and clean to create a tidy data set suitable for further analysis:
-
-1. The data contained in X_test.txt and X_train.txt were combined using `rbind()`
-2. Variable names contained in features.txt were appended to the dataframe in
-step 1
-3. Variables containing either "mean()"" or "std()" in their name were 
-identified and used to extract only columns corresponding to these variables. 
-Variables containing the word "mean", without "()" were not extracted, as they 
-were not considered to be aggregated at a similar level to the other variables 
-extracted.
-4.Subject numbers from subject_test.txt and subject_train.txt were appended to 
-the dataframe as factors
-5. Activities contained in y_test.txt and y_train.txt were appended to the data
-frame as factors, with labels converted to lower case
-6.Variable names were transformed by removing "-" and "()". Camel Case was used
-for variable names, given theirrelative length. Initial "t" was replaced by "time",
-and "f" by "frequency". "Acc" and "Gyro" were left as abbreviations to avoid further
-lengthening variable names. Variable names with "BodyBody" were corrected to "Body"
-7. Using the `melt` function, this data frame was melted into a *long* data set using subjectNumber and activity 
-as ID variables
-8. This long data set was cast using `dcast`into the *wide* dataset described above
-
-    
 
     
     
