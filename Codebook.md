@@ -50,7 +50,7 @@ identified and used to extract only columns corresponding to these variables.
 Variables containing the word "mean", without "()" were not extracted, as they 
 were not considered to be aggregated at a similar level to the other variables 
 extracted.
-4.Subject numbers from subject_test.txt and subject_train.txt were appended to 
+4. Subject numbers from subject_test.txt and subject_train.txt were appended to 
 the dataframe as factors
 5. Activities contained in y_test.txt and y_train.txt were appended to the data
 frame as factors, with labels converted to lower case
